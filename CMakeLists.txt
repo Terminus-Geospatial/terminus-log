@@ -1,0 +1,70 @@
+#    File:    CMakeLists.txt
+#    Author:  Marvin Smith
+#    Date:    7/8/2023
+#
+#    Purpose: Build the terminus logging API
+cmake_minimum_required( VERSION 3.16 FATAL_ERROR )
+
+#  Configure Conan Search Paths
+include( "${CMAKE_BINARY_DIR}/conan_toolchain.cmake" )
+set( CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE )
+
+project( ${CONAN_PKG_NAME}
+        VERSION ${CONAN_PKG_VERSION}
+        HOMEPAGE_URL ${CONAN_PKG_URL}
+        DESCRIPTION ${CONAN_PKG_DESCRIPTION}
+)
+
+# set some common default compiler options
+set( CMAKE_CXX_STANDARD 20 )
+set( CMAKE_CXX_STANDARD_REQUIRED ON )
+
+#  Give Vscode a fighting chance
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Bring in CMake helpers for TERMINUS projects
+include( terminus_cmake )
+
+#  Find dependencies
+set( Boost_WITH_MULTITHREADED ON )
+find_package( Boost REQUIRED
+                COMPONENTS
+                    json
+                    log
+                    log_setup )
+
+# Setup Code Coverage
+if( TERMINUS_LOG_ENABLE_COVERAGE )
+    terminus_coverage_enable()
+endif()
+
+# Setup Header-Only API
+terminus_lib_create_header_only()
+
+target_link_libraries( ${PROJECT_NAME} INTERFACE
+    Boost::json
+    Boost::log
+    Boost::log_setup
+)
+
+#  Setup Installation Targets
+install(
+    EXPORT ${PROJECT_NAME}_exports
+    DESTINATION "${TERMINUS_LOG_CMAKE_INSTALL_DIR}"
+    FILE "${PROJECT_NAME}-targets.cmake"
+    NAMESPACE "${PROJECT_NAME}::"
+)
+
+#  Testing
+if( TERMINUS_LOG_ENABLE_TESTS)
+    enable_testing()
+    if( NOT_TERMINUS_LOG_DISABLE_COMPONENT_TESTS)
+        add_subdirectory( test/component )
+    endif()
+    add_subdirectory( test/unit )
+endif()
+
+#  Setup Coverage Reporting
+if( TERMINUS_LOG_ENABLE_COVERAGE )
+    terminus_coverage_create_target()
+endif()
