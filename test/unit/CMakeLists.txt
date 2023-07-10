@@ -13,3 +13,11 @@ add_executable( ${TEST}
     TEST_Stream_Interceptor.cpp
     TEST_utility.cpp
 )
+
+target_link_libraries( ${TEST} PRIVATE
+    GTest::gmock_main
+    GTest::gtest_main
+    ${PROJECT_NAME}
+)
+
+gtest_discover_tests( ${TEST} )

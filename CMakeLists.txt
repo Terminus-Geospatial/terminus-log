@@ -47,14 +47,6 @@ target_link_libraries( ${PROJECT_NAME} INTERFACE
     Boost::log_setup
 )
 
-#  Setup Installation Targets
-install(
-    EXPORT ${PROJECT_NAME}_exports
-    DESTINATION "${TERMINUS_LOG_CMAKE_INSTALL_DIR}"
-    FILE "${PROJECT_NAME}-targets.cmake"
-    NAMESPACE "${PROJECT_NAME}::"
-)
-
 #  Testing
 if( TERMINUS_LOG_ENABLE_TESTS)
     enable_testing()

@@ -6,7 +6,7 @@
 #pragma once
 
 // Terminus Libraries
-#include "impl/boost/Logger.h"
+#include "impl/boost/Logger.hpp"
 #include "impl/location.hpp"
 
 // C++ Libraries

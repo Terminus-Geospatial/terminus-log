@@ -6,7 +6,7 @@
 #pragma once
 
 /// Terminus Libraries
-#include "impl/boost/configure.h"
+#include "impl/boost/configure.hpp"
 
 /// C++ Libraries
 #include <filesystem>
