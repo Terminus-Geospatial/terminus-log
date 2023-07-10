@@ -15,7 +15,7 @@
 #include <boost/log/expressions/filter.hpp>
 #include <boost/log/sinks/async_frontend.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
-#include <boost/log/text_file_backend.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/from_settings.hpp>
 #include <boost/shared_ptr.hpp>
@@ -207,7 +207,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
             if( !async )
             {
                 using SinkType = boost::log::sinks::synchronous_sink<SinkBackendType>;
-                auto pSink = boost::make_shared<SinkType>( pSinkBackend );
+                auto pSink = boost::make_shared<SinkType>( p_sink_backend );
                 pSink->set_filter( filt );
                 pSink->set_formatter( *format::json );
                 return pSink;
@@ -215,7 +215,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
             else
             {
                 using SinkType = boost::log::sinks::asynchronous_sink<SinkBackendType>;
-                auto pSink = boost::make_shared<SinkType>( pSinkBackend );
+                auto pSink = boost::make_shared<SinkType>( p_sink_backend );
                 pSink->set_filter( filt );
                 pSink->set_formatter( *format::json );
                 return pSink;

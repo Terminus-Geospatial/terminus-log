@@ -29,7 +29,7 @@ void write( LoggerT&                            logger,
             ArgsT&&...                          args )
 {
     auto rec = logger.open_record( boost::log::keywords::severity = severity );
-    if( !!lrec )
+    if( !!rec )
     {
         auto pump = boost::log::aux::make_record_pump( logger, rec );
         (pump.stream() << ... << std::forward<ArgsT>( args ) );
@@ -57,7 +57,7 @@ void write( LoggerT&                            logger,
     );
     BOOST_LOG_SCOPED_THREAD_ATTR(
         "Function",
-        boost::log::attributes::constant<std::string>( location.line() )
+        boost::log::attributes::constant<std::string>( location.function_name() )
     );
     write( logger, severity, std::forward<ArgsT>( args )... );
 }
@@ -120,7 +120,7 @@ template <class... ArgsT>
 void warn( ArgsT&&... args )
 {
     write( boost::log::trivial::logger::get(),
-           boost::log::trivial::severity_level::warn,
+           boost::log::trivial::severity_level::warning,
            std::forward<ArgsT>( args )... );
 }
 
@@ -129,7 +129,7 @@ void warn( std::source_location loc,
             ArgsT&&...           args )
 {
     write( boost::log::trivial::logger::get(),
-           boost::log::trivial::severity_level::warn,
+           boost::log::trivial::severity_level::warning,
            std::move( loc ),
            std::forward<ArgsT>( args )... );
 }
@@ -153,10 +153,10 @@ void error( std::source_location loc,
 }
 
 template <class... ArgsT>
-void debug( ArgsT&&... args )
+void fatal( ArgsT&&... args )
 {
     write( boost::log::trivial::logger::get(),
-           boost::log::trivial::severity_level::debug,
+           boost::log::trivial::severity_level::fatal,
            std::forward<ArgsT>( args )... );
 }
 

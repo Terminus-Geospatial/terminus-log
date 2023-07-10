@@ -8,6 +8,9 @@
 // Terminus Libraries
 #include <terminus/log/utility.hpp>
 
+// Project Libraries
+#include "File_Fixture.hpp"
+
 using Configure = File_Fixture;
 
 TEST_F( Configure, Log_To_File )

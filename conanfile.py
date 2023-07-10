@@ -55,7 +55,7 @@ class ConanProject(ConanFile):
         tc.variables["TERMINUS_LOG_ENABLE_DOCS"]     = self.options.with_docs
         tc.variables["TERMINUS_LOG_ENABLE_COVERAGE"] = self.options.with_coverage
 
-        tc.preprocessor_definitions["TERMINUS_LOG_ENABLE_EXPERIMENTAL_SOURCE_LOCATION"] = "1"
+        tc.preprocessor_definitions["TERMINUS_LOG_ENABLE_SOURCE_LOCATION_HACK"] = "1"
 
         tc.generate()
 

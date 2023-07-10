@@ -17,7 +17,7 @@
 #include <boost/log/expressions.hpp>
 #include <boost/log/support/date_time.hpp>
 #include <boost/log/utility/setup/formatter_parser.hpp>
-#include <boost/pheonix/bind.hpp>
+#include <boost/phoenix/bind.hpp>
 #include <boost/shared_ptr.hpp>
 
 // C++ Libraries
@@ -31,7 +31,7 @@ namespace tmns::log::impl::format {
  * that the `SeverityFormatterFactory` creates so that the user can configure
  * formatting from a format string
 */
-class Severify_Formatter
+class Severity_Formatter
 {
     public:
 
@@ -40,7 +40,7 @@ class Severify_Formatter
          * @param align If true, the string representation of the severity will be left-aligned.
          * @param brackets If true, brackets ("[]") will be inserted around the severity level.
         */
-        Severify_Formatter( bool align, bool brackets )
+        Severity_Formatter( bool align, bool brackets )
          : m_align{ align }, m_brackets { brackets } {}
 
 
@@ -88,7 +88,7 @@ class Severity_Formatter_Factory
             namespace expr = boost::log::expressions;
             bool align    = args.find("align") != args.end();
             bool brackets = args.find("brackets") != args.end();
-            return boost::pheonix::bind( Severity_Formatter{ align, brackets },
+            return boost::phoenix::bind( Severity_Formatter{ align, brackets },
                                          expr::stream,
                                          expr::attr<boost::log::trivial::severity_level>( name )
             );
@@ -108,14 +108,14 @@ class Time_Stamp_Formatter_Factory
 {
     public:
 
-        formatter_type create_formatter( const bool::log::attribute_name& name,
+        formatter_type create_formatter( const boost::log::attribute_name& name,
                                          const args_map&                  args )
         {
             namespace expr = boost::log::expressions;
             auto it = args.find( "format" );
             std::string format = it != args.end() ? it->second : R"(%Y-%m-%d %H:%M:%S.%f)";
             return expr::stream << expr::format_date_time<boost::posix_time::ptime>(
-                                        expr::attr<boost::posix_time::ptime>( name ), format )
+                                        expr::attr<boost::posix_time::ptime>( name ), format );
         }
 
 }; // End of Time_Stamp_Formatter_Factory class
@@ -155,7 +155,7 @@ inline void json( boost::log::record_view const&  rec,
     if( const auto val = bl::extract<boost::posix_time::ptime>( "TimeStamp", rec ))
     {
         const auto& time = val.get();
-        json["RecordID"] = boost::posix_time::to_is_extended_string( time );
+        json["RecordID"] = boost::posix_time::to_iso_extended_string( time );
     }
 
     // Capture Scope

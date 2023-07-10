@@ -34,7 +34,7 @@ class Logger
         */
         Logger( std::string scope )
         {
-            typedef boost::log::attributes::constant<std::string> attr_const
+            typedef boost::log::attributes::constant<std::string> attr_const;
             m_logger.add_attribute( "Scope", attr_const( std::move( scope ) ) );
         }
 
@@ -117,7 +117,7 @@ class Logger
         void warn( ArgsT&&... args )
         {
             impl::write( m_logger,
-                         boost::log::trivial::severity_level::warn,
+                         boost::log::trivial::severity_level::warning,
                          std::forward<ArgsT>( args )... );
         }
 
@@ -129,7 +129,7 @@ class Logger
                    ArgsT&&...           args )
         {
             impl::write( m_logger,
-                         boost::log::trivial::severity_level::warn,
+                         boost::log::trivial::severity_level::warning,
                          std::move( loc ),
                          std::forward<ArgsT>( args )... );
         }
