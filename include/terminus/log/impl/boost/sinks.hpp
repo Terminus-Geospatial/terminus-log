@@ -85,7 +85,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
             // Target file name
             if( boost::optional<std::string> otarget = settings["TargetFileName"])
             {
-                p_sink_backend->set_target_name_pattern( *otarget );
+                p_sink_backend->set_target_file_name_pattern( *otarget );
             }
 
             // Final Rotation
@@ -209,7 +209,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
                 using SinkType = boost::log::sinks::synchronous_sink<SinkBackendType>;
                 auto pSink = boost::make_shared<SinkType>( p_sink_backend );
                 pSink->set_filter( filt );
-                pSink->set_formatter( *format::json );
+                pSink->set_formatter( &format::json );
                 return pSink;
             }
             else
@@ -217,12 +217,12 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
                 using SinkType = boost::log::sinks::asynchronous_sink<SinkBackendType>;
                 auto pSink = boost::make_shared<SinkType>( p_sink_backend );
                 pSink->set_filter( filt );
-                pSink->set_formatter( *format::json );
+                pSink->set_formatter( &format::json );
                 return pSink;
 
                 // The user doesn't have a way to preocess exceptions from threads anyhow
                 // so just suppress exceptions for now
-                pSink->set_execption_handler( boost::log::nop() );
+                pSink->set_exception_handler( boost::log::nop() );
 
                 return pSink;
             }
@@ -234,7 +234,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
 // Register the sync
 inline void configure()
 {
-    boost::log::register_sink_factory( "JsonFile", boost::make_shared<JsonFileSinkFactory>() );
+    boost::log::register_sink_factory( "JsonFile", boost::make_shared<Json_File_Sink_Factory>() );
 }
 
 } // End of tmns::log::impl::sinks namespace

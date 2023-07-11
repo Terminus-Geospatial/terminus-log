@@ -98,8 +98,8 @@ TEST_F( Stream_Interceptor_File, captures_file_stream )
     std::string contents;
     {
         std::ofstream fout{ temp_file() };
-        auto interceptor = Stream_Interceptor( output );
-        output << "Hello, World!" << std::endl;
+        auto interceptor = Stream_Interceptor( fout );
+        fout << "Hello, World!" << std::endl;
         contents = interceptor.get_intercepted_contents();
     }
 
@@ -107,6 +107,6 @@ TEST_F( Stream_Interceptor_File, captures_file_stream )
 
     // Make sure the file is still empty
     std::ifstream fin{ temp_file(), std::ifstream::binary | std::ifstream::ate };
-    auto size = input.tellg();
+    auto size = fin.tellg();
     EXPECT_EQ( size, 0 );
 }

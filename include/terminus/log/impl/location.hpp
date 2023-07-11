@@ -26,23 +26,42 @@ namespace std
 class source_location
 {
     public:
-    static consteval source_location current() noexcept;
-    constexpr source_location() noexcept;
 
-    // source location field access
-    inline constexpr uint_least32_t line() const noexcept
-    {
-        return -1;
-    }
-    constexpr uint_least32_t column() const noexcept;
-    inline constexpr const char* file_name() const noexcept
-    {
-        return "NOT IMPLEMENTED";
-    }
-    inline constexpr const char* function_name() const noexcept
-    {
-        return "NOT IMPLEMENTED";
-    }
+        static constexpr source_location current( const uint_least32_t line     = __LINE__,
+                                                  const std::string&   filename = __FILE__,
+                                                  const std::string&   function = "NOT_IMPLEMENTED" ) noexcept
+        {
+            std::source_location result;
+            result.m_line     = line;
+            result.m_file     = filename;
+            result.m_function = function;
+            return result;
+        }
+
+        constexpr source_location() noexcept = default;
+
+        // source location field access
+        inline constexpr uint_least32_t line() const noexcept
+        {
+            return m_line;
+        }
+        constexpr uint_least32_t column() const noexcept;
+        inline constexpr const char* file_name() const noexcept
+        {
+            return m_file.c_str();
+        }
+        inline constexpr const char* function_name() const noexcept
+        {
+            return m_function.c_str();
+        }
+
+
+    private:
+
+        uint_least32_t m_line{};
+        //uint_least32_t m_column{};
+        std::string m_file { "" };
+        std::string m_function { "" };
 };
 
 }

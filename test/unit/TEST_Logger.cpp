@@ -17,7 +17,7 @@ using Logger = Console_Fixture;
 /************************************/
 /*      Verify the Trace Logger     */
 /************************************/
-TEST_F( Logger, LogTrace )
+TEST_F( Logger, Log_Trace )
 {
     tmns::log::Logger logger{ "test" };
     logger.trace( "Hello, World!" );
@@ -30,7 +30,7 @@ TEST_F( Logger, LogTrace )
 /************************************/
 /*      Verify the Debug Logger     */
 /************************************/
-TEST_F( Logger, LogTrace )
+TEST_F( Logger, Log_Debug )
 {
     tmns::log::Logger logger{ "test" };
     logger.debug( "Hello, World!" );
@@ -43,7 +43,7 @@ TEST_F( Logger, LogTrace )
 /***********************************/
 /*      Verify the Info Logger     */
 /***********************************/
-TEST_F( Logger, LogInfo )
+TEST_F( Logger, Log_Info )
 {
     tmns::log::Logger logger{ "test" };
     logger.info( "Hello, World!" );
@@ -56,7 +56,7 @@ TEST_F( Logger, LogInfo )
 /**************************************/
 /*      Verify the Warning Logger     */
 /**************************************/
-TEST_F( Logger, LogWarning )
+TEST_F( Logger, Log_Warning )
 {
     tmns::log::Logger logger{ "test" };
     logger.warn( "Hello, World!" );
@@ -69,7 +69,7 @@ TEST_F( Logger, LogWarning )
 /************************************/
 /*      Verify the Error Logger     */
 /************************************/
-TEST_F( Logger, LogError )
+TEST_F( Logger, Log_Error )
 {
     tmns::log::Logger logger{ "test" };
     logger.error( "Hello, World!" );
@@ -82,7 +82,7 @@ TEST_F( Logger, LogError )
 /************************************/
 /*      Verify the Fatal Logger     */
 /************************************/
-TEST_F( Logger, LogFatal )
+TEST_F( Logger, Log_Fatal )
 {
     tmns::log::Logger logger{ "test" };
     logger.fatal( "Hello, World!" );
@@ -127,7 +127,7 @@ TEST_F( Logger, Log_Arguments_Info )
 {
     std::string name{ "Mary" };
     tmns::log::Logger logger{ "test" };
-    logger.trace( "Hello ", name, ", You have ", 99, " items." );
+    logger.info( "Hello ", name, ", You have ", 99, " items." );
 
     expect_captured( "test" );
     expect_captured( "info" );
@@ -181,11 +181,11 @@ TEST_F( Logger, Log_Arguments_Fatal )
 /********************************************/
 TEST_F( Logger, Log_Location_Trace )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.trace( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.trace( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "trace" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 
 /********************************************/
@@ -193,11 +193,11 @@ TEST_F( Logger, Log_Location_Trace )
 /********************************************/
 TEST_F( Logger, Log_Location_Debug )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.debug( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.debug( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "debug" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 
 /*******************************************/
@@ -205,11 +205,11 @@ TEST_F( Logger, Log_Location_Debug )
 /*******************************************/
 TEST_F( Logger, Log_Location_Info )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.info( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.info( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "info" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 
 /**********************************************/
@@ -217,11 +217,11 @@ TEST_F( Logger, Log_Location_Info )
 /**********************************************/
 TEST_F( Logger, Log_Location_Warning )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.warning( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.warn( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "warn" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 
 /********************************************/
@@ -229,11 +229,11 @@ TEST_F( Logger, Log_Location_Warning )
 /********************************************/
 TEST_F( Logger, Log_Location_Error )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.error( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.error( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "error" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 
 /********************************************/
@@ -241,10 +241,10 @@ TEST_F( Logger, Log_Location_Error )
 /********************************************/
 TEST_F( Logger, Log_Location_Fatal )
 {
-    tmn::log::Logger logger{ "test" };
-    logger.fatal( arc::log::loc(), "Hello, World!" );
+    tmns::log::Logger logger{ "test" };
+    logger.fatal( tmns::log::loc(), "Hello, World!" );
 
     expect_captured( "fatal" );
-    expect_capture( "TEST_Logger.cpp" );
+    expect_captured( "TEST_Logger.cpp" );
 }
 

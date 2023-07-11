@@ -21,7 +21,7 @@
  * captures the contents written to the console.  The fixture also provides a utility member
  * function that makes it easy to check the contents of the captured output for a substring.
 */
-class ConsoleFixture : public testing::Test
+class Console_Fixture : public testing::Test
 {
     protected:
 
@@ -30,12 +30,12 @@ class ConsoleFixture : public testing::Test
             std::istringstream config{R"(
                 [Sinks.Console]
                 Destination=Console
-                Format="%Severity% %Scope% %Message% %File%
+                Format="%Severity% %Scope% %Message% %File%"
             )" };
             EXPECT_TRUE( tmns::log::configure( config ) );
         }
 
-        void expectCaptured( const std::string_view contents )
+        void expect_captured( const std::string_view contents )
         {
             if( m_captured_contents.empty() )
             {
@@ -49,4 +49,4 @@ class ConsoleFixture : public testing::Test
         tmns::log::test::Stream_Interceptor m_interceptor{ std::clog };
         std::string m_captured_contents;
 
-}; // End of ConsoleFixture Class
+}; // End of Console_Fixture Class

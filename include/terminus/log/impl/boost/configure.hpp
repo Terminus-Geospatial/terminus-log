@@ -20,7 +20,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace tmns::log::impl::boost {
+namespace tmns::log::impl {
 
 /**
  * Configures the Boost backend of the library by adding global attributes to the log
@@ -31,8 +31,7 @@ inline bool configure()
     const std::string FORMAT_STR = R"([%TimeStamp%] %Severity(align=true,brackets=true)%  (%Scope%) %Message%)";
     format::configure();
     boost::log::add_console_log( std::cerr,
-                                 boost::log::keywords::format
-                                    = FORMAT_STR );
+                                 boost::log::keywords::format = FORMAT_STR );
     return attributes::configure();
 }
 
@@ -92,4 +91,4 @@ inline bool configure( std::filesystem::path& config_path )
     return configure( config_stream );
 }
 
-} // end of tmns::log::impl::boost namespace
+} // end of tmns::log::impl namespace

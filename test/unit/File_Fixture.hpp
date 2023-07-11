@@ -41,7 +41,7 @@ class File_Fixture : public testing::Test
                 Format="%Severity% %Scope% %Message% %File%
                 FileName=)" };
 
-            contents += "\"" + temp_file.string() + "\"";
+            contents += "\"" + m_temp_file.string() + "\"";
             std::istringstream config{ std::move( contents) };
 
             // Configure the library to write to our address
@@ -55,7 +55,7 @@ class File_Fixture : public testing::Test
 
         [[nodiscard]] const std::filesystem::path& temp_file() const
         {
-            return m_tempfile;
+            return m_temp_file;
         }
 
         void expect_file_contains( const std::string_view content )
@@ -80,5 +80,5 @@ class File_Fixture : public testing::Test
         std::filesystem::path m_temp_file;
 
         std::string m_contents;
-        
+
 }; // End of File_Fixture Class
