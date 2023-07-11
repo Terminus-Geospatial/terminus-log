@@ -1,0 +1,13 @@
+/**
+ * @file    Exports.hpp
+ * @author  Marvin Smith
+ * @date    7/10/2023
+*/
+#pragma once
+
+/**
+ * Flag to determine if we have <source_location> available or if we need
+ * to hack it.
+*/
+#define TERMINUS_LOG_SOURCE_LOCATION_METHOD @TERMINUS_LOG_SOURCE_LOCATION_METHOD@
+

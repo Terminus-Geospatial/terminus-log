@@ -5,12 +5,15 @@
 */
 #pragma once
 
+// Terminus Includes
+#include "../Exports.hpp"
+
 /**
  * This flag allows clients of the library to use std::source_location if they
  * support it in the experimental version.  This is not entirely supported yet,
  * so this flag may be necessary.
 */
-#ifdef TERMINUS_LOG_ENABLE_EXPERIMENTAL_SOURCE_LOCATION
+#if TERMINUS_LOG_SOURCE_LOCATION_METHOD == 2
 
 #include <experimental/source_location>
 
@@ -19,7 +22,7 @@ namespace std
     using std::experimental::source_location;
 }
 
-#elif TERMINUS_LOG_ENABLE_SOURCE_LOCATION_HACK
+#elif TERMINUS_LOG_SOURCE_LOCATION_METHOD == 1
 
 namespace std
 {

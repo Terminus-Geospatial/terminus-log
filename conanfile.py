@@ -21,13 +21,17 @@ class ConanProject(ConanFile):
     options = {
         "with_tests": [True, False],
         "with_docs": [True, False],
-        "with_coverage": [True, False]
+        "with_coverage": [True, False],
+        "use_source_location": [True, False],
+        "use_source_location_hack": [True, False]
     }
 
     default_options = {
         "with_tests": True,
         "with_docs": True,
-        "with_coverage": False
+        "with_coverage": False,
+        "use_source_location": False,
+        "use_source_location_hack": True
     }
 
 
@@ -55,7 +59,15 @@ class ConanProject(ConanFile):
         tc.variables["TERMINUS_LOG_ENABLE_DOCS"]     = self.options.with_docs
         tc.variables["TERMINUS_LOG_ENABLE_COVERAGE"] = self.options.with_coverage
 
-        tc.preprocessor_definitions["TERMINUS_LOG_ENABLE_SOURCE_LOCATION_HACK"] = "1"
+        if self.options.use_source_location:
+            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "0"
+        elif not self.options.use_source_location and not self.options.use_source_location_hack:
+            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "2"
+        elif not self.options.use_source_location and self.options.use_source_location_hack:
+            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "1"
+        else:
+            raise Exception("Unknown state")
+        print("TERMINUS_LOG_SOURCE_LOCATION_METHOD: ", tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"])
 
         tc.generate()
 

@@ -33,6 +33,10 @@ find_package( Boost REQUIRED
                     log
                     log_setup )
 
+#  Setup Exports File
+configure_file( ${CMAKE_SOURCE_DIR}/templates/Exports.hpp.in
+                ${CMAKE_SOURCE_DIR}/include/terminus/log/Exports.hpp )
+
 # Setup Code Coverage
 if( TERMINUS_LOG_ENABLE_COVERAGE )
     terminus_coverage_enable()
