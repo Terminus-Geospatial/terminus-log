@@ -14,6 +14,9 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/trivial.hpp>
 
+// C++ Libraries
+#include <string>
+
 namespace tmns::log::impl {
 
 /**
