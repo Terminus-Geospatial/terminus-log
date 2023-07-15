@@ -8,6 +8,9 @@
 // Terminus Includes
 #include "../Exports.hpp"
 
+// C++ Libraries
+#include <cstdint>
+
 /**
  * This flag allows clients of the library to use std::source_location if they
  * support it in the experimental version.  This is not entirely supported yet,
