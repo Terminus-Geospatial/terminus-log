@@ -26,7 +26,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include( terminus_cmake )
 
 #  Find dependencies
-set( Boost_WITH_MULTITHREADED ON )
+set( Boost_USE_MULTITHREADED ON )
 find_package( Boost REQUIRED
                 COMPONENTS
                     json
@@ -42,10 +42,10 @@ if( TERMINUS_LOG_ENABLE_COVERAGE )
     terminus_coverage_enable()
 endif()
 
-# Setup Header-Only API
-terminus_lib_create_header_only()
+add_subdirectory( src )
 
-target_link_libraries( ${PROJECT_NAME} INTERFACE
+
+target_link_libraries( ${PROJECT_NAME} PUBLIC
     Boost::json
     Boost::log
     Boost::log_setup

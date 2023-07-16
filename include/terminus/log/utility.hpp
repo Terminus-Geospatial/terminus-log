@@ -202,17 +202,11 @@ void fatal( std::source_location loc,
  * @returns the source location passed into the function.  This is just an identity function to make
  * adding source location information easier (fewer characters to type).
 */
-inline std::source_location loc( std::source_location location = std::source_location::current() )
-{
-    return std::move( location );
-}
+std::source_location loc( std::source_location location = std::source_location::current() );
 
 /**
  * Blocks to flush all log records to their final destination
 */
-inline void flush()
-{
-    impl::flush();
-}
+void flush();
 
 }  // End of tmns::log namespace

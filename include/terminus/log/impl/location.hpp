@@ -10,6 +10,7 @@
 
 // C++ Libraries
 #include <cstdint>
+#include <string>
 
 /**
  * This flag allows clients of the library to use std::source_location if they

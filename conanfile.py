@@ -19,6 +19,7 @@ class ConanProject(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     options = {
+        "shared": [True, False],
         "with_tests": [True, False],
         "with_docs": [True, False],
         "with_coverage": [True, False],
@@ -27,11 +28,13 @@ class ConanProject(ConanFile):
     }
 
     default_options = {
+        "shared": True,
         "with_tests": True,
         "with_docs": True,
         "with_coverage": False,
         "use_source_location": False,
-        "use_source_location_hack": True
+        "use_source_location_hack": True,
+        "boost/*:shared": True
     }
 
 
