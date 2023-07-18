@@ -28,7 +28,7 @@ namespace tmns::log::impl {
 */
 inline bool configure()
 {
-    const std::string FORMAT_STR = R"([%TimeStamp%] %Severity(align=true,brackets=true)%  (%Scope%) %Message%)";
+    const std::string FORMAT_STR = R"([%TimeStamp%] %Severity(align=true,brackets=true)% %File%:%LineID% (%Scope%) %Message%)";
     format::configure();
     boost::log::add_console_log( std::cerr,
                                  boost::log::keywords::format = FORMAT_STR );

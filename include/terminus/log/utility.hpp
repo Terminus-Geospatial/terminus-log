@@ -202,7 +202,11 @@ void fatal( std::source_location loc,
  * @returns the source location passed into the function.  This is just an identity function to make
  * adding source location information easier (fewer characters to type).
 */
+#if TERMINUS_LOG_SOURCE_LOCATION_METHOD != 1
+std::source_location loc( std::source_location location = CURRENT_LOC() );
+#else
 std::source_location loc( std::source_location location = std::source_location::current() );
+#endif
 
 /**
  * Blocks to flush all log records to their final destination

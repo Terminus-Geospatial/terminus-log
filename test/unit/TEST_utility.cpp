@@ -14,6 +14,14 @@
 using Utility = Console_Fixture;
 
 /********************************/
+/*      no fixture logger       */
+/********************************/
+TEST( Utility_non_fixture, log_trace )
+{
+    tmns::log::trace( "Hello, World!" );
+}
+
+/********************************/
 /*      Test trace logging      */
 /********************************/
 TEST_F( Utility, log_trace )

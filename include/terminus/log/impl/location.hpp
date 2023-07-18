@@ -28,6 +28,8 @@ namespace std
 
 #elif TERMINUS_LOG_SOURCE_LOCATION_METHOD == 1
 
+#define CURRENT_LOC() std::source_location::current( __LINE__, __FILE__, __FUNCTION__ )
+
 namespace std
 {
 class source_location
@@ -36,7 +38,7 @@ class source_location
 
         static constexpr source_location current( const uint_least32_t line     = __LINE__,
                                                   const std::string&   filename = __FILE__,
-                                                  const std::string&   function = "NOT_IMPLEMENTED" ) noexcept
+                                                  const std::string&   function = "" ) noexcept
         {
             std::source_location result;
             result.m_line     = line;
