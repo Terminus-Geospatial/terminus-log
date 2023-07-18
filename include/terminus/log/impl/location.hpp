@@ -28,7 +28,7 @@ namespace std
 
 #elif TERMINUS_LOG_SOURCE_LOCATION_METHOD == 1
 
-#define CURRENT_LOC() std::source_location::current( __LINE__, __FILE__, __FUNCTION__ )
+#define ADD_CURRENT_LOC() std::filesystem::path(__FILE__).filename().native() + ":" + std::to_string(__LINE__) + ", Func: " + std::string( __FUNCTION__) + "  "
 
 namespace std
 {
