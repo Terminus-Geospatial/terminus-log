@@ -1,11 +1,14 @@
 #    File:    CMakeLists.txt
 #    Author:  Marvin Smith
 #    Date:    7/8/2023
+#
 
+#  Configure GoogleTest
+message( STATUS "CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}" )
 find_package( GTest REQUIRED )
 include( GoogleTest )
 
-set(TEST terminus_log_tests)
+set(TEST ${PROJECT_NAME}_test)
 
 add_executable( ${TEST}
     TEST_configure.cpp

@@ -3,19 +3,22 @@
 #    Date:    7/8/2023
 #
 #    Purpose: Build the terminus logging API
+#
 cmake_minimum_required( VERSION 3.16 FATAL_ERROR )
 
 #  Configure Conan Search Paths
 include( "${CMAKE_BINARY_DIR}/conan_toolchain.cmake" )
 set( CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE )
 
+# Set the Project-Name
 project( ${CONAN_PKG_NAME}
         VERSION ${CONAN_PKG_VERSION}
         HOMEPAGE_URL ${CONAN_PKG_URL}
         DESCRIPTION ${CONAN_PKG_DESCRIPTION}
+        LANGUAGES CXX
 )
 
-# set some common default compiler options
+#  Set C++ 20 Support
 set( CMAKE_CXX_STANDARD 20 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
@@ -64,3 +67,5 @@ endif()
 if( TERMINUS_LOG_ENABLE_COVERAGE )
     terminus_coverage_create_target()
 endif()
+
+install( DIRECTORY include/terminus DESTINATION include)

@@ -11,37 +11,33 @@ class ConanProject(ConanFile):
     version = "0.0.1"
 
     license = "Terminus Proprietary"
-    author  = "Marvin Smith"
+    author  = "Marvin Smith <marvin_smith1@me.com>"
     url     = "https://bitbucket.org/msmith81886/terminus-log/src"
     description = "Standardized, extensible, and customizable logging"
-    topics = ()
+    topics = ("terminus","log")
+
+    options = { "shared": [True, False],
+                "with_tests": [True, False],
+                "with_docs": [True, False],
+                "with_coverage": [True, False],
+                "use_source_location": [True, False],
+                "use_source_location_hack": [True, False]
+    }
+
+    default_options = { "shared": True,
+                        "with_tests": True,
+                        "with_docs": True,
+                        "with_coverage": False,
+                        "use_source_location": False,
+                        "use_source_location_hack": True,
+                        "boost/*:shared": True
+    }
 
     settings = "os", "compiler", "build_type", "arch"
 
-    options = {
-        "shared": [True, False],
-        "with_tests": [True, False],
-        "with_docs": [True, False],
-        "with_coverage": [True, False],
-        "use_source_location": [True, False],
-        "use_source_location_hack": [True, False]
-    }
-
-    default_options = {
-        "shared": True,
-        "with_tests": True,
-        "with_docs": True,
-        "with_coverage": False,
-        "use_source_location": False,
-        "use_source_location_hack": True,
-        "boost/*:shared": True
-    }
-
-
     def build_requirements(self):
-        self.build_requires("terminus_cmake/1.0.0")
-        if self.options.with_tests:
-            self.build_requires( "gtest/1.13.0" )
+        self.test_requires("gtest/1.13.0")
+        self.tool_requires("terminus_cmake/1.0.0")
 
     def requirements(self):
         self.requires("boost/1.82.0")
@@ -96,5 +92,5 @@ class ConanProject(ConanFile):
 
     def export_sources(self):
 
-        for p in [ "CMakeLists.txt", "include/*", "test/*", "README.md" ]:
+        for p in [ "CMakeLists.txt", "include/*", "src/*", "test/*", "README.md" ]:
             copy( self, p, self.recipe_folder, self.export_sources_folder )

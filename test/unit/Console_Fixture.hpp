@@ -27,7 +27,7 @@ class Console_Fixture : public testing::Test
 
         void SetUp() override
         {
-            std::istringstream config{R"(
+            std::istringstream config{ R"(
                 [Sinks.Console]
                 Destination=Console
                 Format="%Severity% %Scope% %Message% %File%"
