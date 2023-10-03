@@ -23,4 +23,4 @@ target_link_libraries( ${TEST} PRIVATE
     ${PROJECT_NAME}
 )
 
-gtest_discover_tests( ${TEST} )
+gtest_discover_tests( ${TEST} PROPERTIES TIMEOUT 600 )
