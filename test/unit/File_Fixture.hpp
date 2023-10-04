@@ -7,6 +7,7 @@
 
 // Terminus Libraries
 #include <terminus/log/configure.hpp>
+#include <terminus/log/utility.hpp>
 
 // GoogleTest Libraries
 #include <gmock/gmock.h>
@@ -27,6 +28,9 @@ class File_Fixture : public testing::Test
 
         void SetUp() override
         {
+            // Log while we're still a console logger.
+            tmns::log::debug( "Setting up File_Fixture" );
+
             std::srand( static_cast<unsigned int>( reinterpret_cast<std::uintptr_t>( this ) ) );
             int num = std::rand();
 
@@ -38,7 +42,7 @@ class File_Fixture : public testing::Test
             std::string contents{ R"(
                 [Sinks.File]
                 Destination=TextFile
-                Format="%Severity% %Scope% %Message% %File%
+                Format="%Severity% %Scope% %Message% %File%"
                 FileName=)" };
 
             contents += "\"" + m_temp_file.string() + "\"";
@@ -51,6 +55,8 @@ class File_Fixture : public testing::Test
         void TearDown() override
         {
             std::filesystem::remove( m_temp_file );
+            tmns::log::configure();
+            tmns::log::debug( "Finished Tearing Down File_Fixture" );
         }
 
         [[nodiscard]] const std::filesystem::path& temp_file() const
@@ -78,7 +84,6 @@ class File_Fixture : public testing::Test
     private:
 
         std::filesystem::path m_temp_file;
-
         std::string m_contents;
 
 }; // End of File_Fixture Class

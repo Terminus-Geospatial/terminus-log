@@ -5,4 +5,4 @@
 
 ### Notes for Raspberry Pi
 
-    conan-build.sh -c -o use_source_location_hack=False
+    conan-build.sh -c -o use_source_location_hack=False -o use_source_location_hack=False

@@ -24,7 +24,7 @@ namespace tmns::log::test {
  * Once an instance of this class destructs, the stream it was capturing will be restored
  * to it's previous state.
 */
-class Stream_Interceptor
+class Stream_Interceptor : public std::streambuf
 {
     public:
 
@@ -108,9 +108,9 @@ class Stream_Interceptor
          * @param stream The stream to intercept
         */
         Stream_Interceptor( std::ostream& stream )
-          : m_original_stream{ stream }
+          : m_original_stream{ stream },
+            m_orig_buf{ m_original_stream.rdbuf( this ) }
         {
-            m_p_orig_buf = m_original_stream.rdbuf( m_intercepting_stream.rdbuf() );
         }
 
         /**
@@ -119,7 +119,7 @@ class Stream_Interceptor
         */
         virtual ~Stream_Interceptor()
         {
-            m_original_stream.rdbuf( m_p_orig_buf );
+            m_original_stream.rdbuf( m_orig_buf );
         }
 
         /**
@@ -131,16 +131,26 @@ class Stream_Interceptor
             return m_intercepting_stream.str();
         }
 
+    protected:
+
+        std::streamsize xsputn( const char*      msg,
+                                std::streamsize  count )
+        {
+            //Output to new stream with old buffer (to e.g. screen [std::cout])
+            m_intercepting_stream.write( msg, count );
+            return count;
+        }
+
     private:
+
+        /// The internal stream we use to intercept writes to
+        std::stringstream m_intercepting_stream;
 
         /// Reference to original stream we intercepted
         std::ostream& m_original_stream;
 
         /// Pointer to the original buffer of the stream we intercepted.
-        std::streambuf* m_p_orig_buf;
-
-        /// The internal stream we use to intercept writes to
-        std::ostringstream m_intercepting_stream;
+        std::streambuf* m_orig_buf;
         
 }; // End of Stream_Interceptor Class
 

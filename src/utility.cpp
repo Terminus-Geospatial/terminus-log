@@ -11,14 +11,6 @@
 namespace tmns::log {
 
 /****************************************/
-/*          Get source location         */
-/****************************************/
-std::source_location loc( std::source_location location )
-{
-    return location;
-}
-
-/****************************************/
 /*          Flush to final dest         */
 /****************************************/
 void flush()

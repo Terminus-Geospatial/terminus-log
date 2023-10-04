@@ -17,7 +17,7 @@
  * support it in the experimental version.  This is not entirely supported yet,
  * so this flag may be necessary.
 */
-#if TERMINUS_LOG_SOURCE_LOCATION_METHOD == 2
+#if TERMINUS_LOG_SOURCE_LOCATION_METHOD == 0
 
 #include <experimental/source_location>
 
@@ -78,5 +78,7 @@ class source_location
 #else
 
 #include <source_location>
+
+#define ADD_CURRENT_LOC() std::source_location::current()
 
 #endif

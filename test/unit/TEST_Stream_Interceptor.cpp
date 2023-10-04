@@ -29,7 +29,7 @@ TEST( Stream_Interceptor, Capture_Stdout )
     auto interceptor = Stream_Interceptor::cout();
     std::cout << "Hello, World!" << std::endl;
     auto contents = interceptor.get_intercepted_contents();
-    EXPECT_EQ( contents, "Hello, World!\n" );
+    EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /*********************************************************/
@@ -41,7 +41,7 @@ TEST( Stream_Interceptor, Capture_Stdout_Functor )
         [](){ std::cout << "Hello, World!" << std::endl;
     });
 
-   EXPECT_EQ( contents, "Hello, World!\n" );
+   EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /********************************************/
@@ -52,7 +52,7 @@ TEST( Stream_Interceptor, Capture_Stderr )
     auto interceptor = Stream_Interceptor::cerr();
     std::cerr << "Hello, World!" << std::endl;
     auto contents = interceptor.get_intercepted_contents();
-    EXPECT_EQ( contents, "Hello, World!\n" );
+    EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /*********************************************************/
@@ -64,7 +64,7 @@ TEST( Stream_Interceptor, Capture_Stdcerr_Functor )
         [](){ std::cerr << "Hello, World!" << std::endl;
     });
 
-   EXPECT_EQ( contents, "Hello, World!\n" );
+   EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /********************************************/
@@ -75,7 +75,7 @@ TEST( Stream_Interceptor, Capture_Stdlog )
     auto interceptor = Stream_Interceptor::clog();
     std::clog << "Hello, World!" << std::endl;
     auto contents = interceptor.get_intercepted_contents();
-    EXPECT_EQ( contents, "Hello, World!\n" );
+    EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /*********************************************************/
@@ -87,7 +87,7 @@ TEST( Stream_Interceptor, Capture_Stdlog_Functor )
         [](){ std::clog << "Hello, World!" << std::endl;
     });
 
-   EXPECT_EQ( contents, "Hello, World!\n" );
+   EXPECT_EQ( contents, "Hello, World!" );
 }
 
 /************************************************************/
@@ -103,7 +103,7 @@ TEST_F( Stream_Interceptor_File, captures_file_stream )
         contents = interceptor.get_intercepted_contents();
     }
 
-    EXPECT_EQ( contents, "Hello, World!\n" );
+    EXPECT_EQ( contents, "Hello, World!" );
 
     // Make sure the file is still empty
     std::ifstream fin{ temp_file(), std::ifstream::binary | std::ifstream::ate };

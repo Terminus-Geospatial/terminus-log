@@ -109,7 +109,7 @@ TEST_F( Utility, Log_Arguments_Debug )
 TEST_F( Utility, Log_Arguments_Info )
 {
     std::string name{ "Mary" };
-    tmns::log::trace( "Hello ", name, ", You have ", 99, " items." );
+    tmns::log::info( "Hello ", name, ", You have ", 99, " items." );
     expect_captured( "info" );
     expect_captured( "Hello Mary, You have 99 items." );
 }
@@ -120,7 +120,7 @@ TEST_F( Utility, Log_Arguments_Info )
 TEST_F( Utility, Log_Arguments_Warning )
 {
     std::string name{ "Phil" };
-    tmns::log::trace( "Hello ", name, ", You have ", 77, " items." );
+    tmns::log::warn( "Hello ", name, ", You have ", 77, " items." );
     expect_captured( "warn" );
     expect_captured( "Hello Phil, You have 77 items." );
 }
@@ -131,7 +131,7 @@ TEST_F( Utility, Log_Arguments_Warning )
 TEST_F( Utility, Log_Arguments_Error )
 {
     std::string name{ "Dan" };
-    tmns::log::trace( "Hello ", name, ", You have ", 3, " items." );
+    tmns::log::error( "Hello ", name, ", You have ", 3, " items." );
     expect_captured( "error" );
     expect_captured( "Hello Dan, You have 3 items." );
 }
@@ -142,7 +142,7 @@ TEST_F( Utility, Log_Arguments_Error )
 TEST_F( Utility, Log_Arguments_Fatal )
 {
     std::string name{ "Aaron" };
-    tmns::log::trace( "Hello ", name, ", You have ", 51, " items." );
+    tmns::log::fatal( "Hello ", name, ", You have ", 51, " items." );
     expect_captured( "fatal" );
     expect_captured( "Hello Aaron, You have 51 items." );
 }
@@ -152,9 +152,9 @@ TEST_F( Utility, Log_Arguments_Fatal )
 /********************************************/
 TEST_F( Utility, Log_Location_Trace )
 {
-    tmns::log::trace( tmns::log::loc(), "Hello, World!" );
+    tmns::log::trace( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "trace" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
 
 /********************************************/
@@ -162,9 +162,9 @@ TEST_F( Utility, Log_Location_Trace )
 /********************************************/
 TEST_F( Utility, Log_Location_Debug )
 {
-    tmns::log::debug( tmns::log::loc(), "Hello, World!" );
+    tmns::log::debug( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "debug" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
 
 /*******************************************/
@@ -172,9 +172,9 @@ TEST_F( Utility, Log_Location_Debug )
 /*******************************************/
 TEST_F( Utility, Log_Location_Info )
 {
-    tmns::log::info( tmns::log::loc(), "Hello, World!" );
+    tmns::log::info( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "info" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
 
 /**********************************************/
@@ -182,9 +182,9 @@ TEST_F( Utility, Log_Location_Info )
 /**********************************************/
 TEST_F( Utility, Log_Location_Warning )
 {
-    tmns::log::warn( tmns::log::loc(), "Hello, World!" );
+    tmns::log::warn( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "warn" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
 
 /********************************************/
@@ -192,9 +192,9 @@ TEST_F( Utility, Log_Location_Warning )
 /********************************************/
 TEST_F( Utility, Log_Location_Error )
 {
-    tmns::log::error( tmns::log::loc(), "Hello, World!" );
+    tmns::log::error( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "error" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
 
 /********************************************/
@@ -202,7 +202,7 @@ TEST_F( Utility, Log_Location_Error )
 /********************************************/
 TEST_F( Utility, Log_Location_Fatal )
 {
-    tmns::log::fatal( tmns::log::loc(), "Hello, World!" );
+    tmns::log::fatal( ADD_CURRENT_LOC(), "Hello, World!" );
     expect_captured( "fatal" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_utility.cpp" );
 }
