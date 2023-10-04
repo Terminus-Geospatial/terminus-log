@@ -21,7 +21,8 @@ class ConanProject(ConanFile):
                 "with_docs": [True, False],
                 "with_coverage": [True, False],
                 "use_source_location": [True, False],
-                "use_source_location_hack": [True, False]
+                "use_source_location_hack": [True, False],
+                "use_external_boost": [True,False]
     }
 
     default_options = { "shared": True,
@@ -30,6 +31,7 @@ class ConanProject(ConanFile):
                         "with_coverage": False,
                         "use_source_location": False,
                         "use_source_location_hack": True,
+                        "use_external_boost": False,
                         "boost/*:shared": True
     }
 
@@ -40,7 +42,8 @@ class ConanProject(ConanFile):
         self.tool_requires("terminus_cmake/1.0.1")
 
     def requirements(self):
-        self.requires("boost/1.82.0")
+        if not self.options.use_external_boost:
+            self.requires("boost/1.82.0")
 
     def _configure_cmake(self):
         cmake = CMake(self)
