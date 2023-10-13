@@ -8,7 +8,7 @@ from conan.tools.files import copy
 class ConanProject(ConanFile):
 
     name = "terminus_log"
-    version = "0.0.2"
+    version = "0.0.3"
 
     license = "Terminus Proprietary"
     author  = "Marvin Smith <marvin_smith1@me.com>"
@@ -30,7 +30,7 @@ class ConanProject(ConanFile):
                         "with_docs": True,
                         "with_coverage": False,
                         "use_source_location": False,
-                        "use_source_location_hack": True,
+                        "use_source_location_hack": False,
                         "use_external_boost": False,
                         "boost/*:shared": True
     }
