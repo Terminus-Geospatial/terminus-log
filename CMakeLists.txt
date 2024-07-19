@@ -71,4 +71,11 @@ if( TERMINUS_LOG_ENABLE_COVERAGE )
     terminus_coverage_create_target()
 endif()
 
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+    ${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+    INSTALL_DESTINATION ${INSTALL_CMAKEDIR}
+)
+
 install( DIRECTORY include/terminus DESTINATION include )
