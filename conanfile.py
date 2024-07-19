@@ -96,4 +96,7 @@ class ConanProject(ConanFile):
     def export_sources(self):
 
         for p in [ "CMakeLists.txt", "include/*", "src/*", "test/*", "README.md" ]:
-            copy( self, p, self.recipe_folder, self.export_sources_folder )
+            copy( self,
+                  p,
+                  self.recipe_folder,
+                  self.export_sources_folder )
