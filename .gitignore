@@ -2,3 +2,4 @@ include/terminus/log/Exports.hpp
 build
 *.DS_Store
 CMakeUserPresets.json
+.vscode
