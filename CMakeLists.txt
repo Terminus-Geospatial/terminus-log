@@ -46,9 +46,9 @@ if( TERMINUS_LOG_ENABLE_COVERAGE )
     terminus_coverage_enable()
 endif()
 
-add_subdirectory( src )
+terminus_lib_create_header_only()
 
-target_link_libraries( ${PROJECT_NAME} PUBLIC
+target_link_libraries( ${PROJECT_NAME} INTERFACE
     Boost::boost
     Boost::json
     Boost::log
@@ -74,10 +74,26 @@ endif()
 set(INSTALL_CMAKEDIR share/cmake/${PROJECT_NAME})
 
 include(CMakePackageConfigHelpers)
-configure_package_config_file(
-    ${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-    INSTALL_DESTINATION ${INSTALL_CMAKEDIR}
+configure_file( "cmake/config.cmake.in"
+                "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake" @ONLY )
+write_basic_package_version_file("${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
 )
 
-install( DIRECTORY include/terminus DESTINATION include )
+set( TMNS_LOG_CMAKE_INSTALL_DIR "lib/cmake/${PROJECT_NAME}")
+install( 
+    FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+    DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
+)
+install( 
+    FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+    DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
+)
+install( 
+    EXPORT ${PROJECT_NAME}_exports
+    DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
+    FILE "${PROJECT_NAME}-targets.cmake"
+    NAMESPACE "${PROJECT_NAME}::"
+)
+

@@ -210,6 +210,9 @@ inline std::source_location loc( std::source_location location = std::source_loc
 /**
  * Blocks to flush all log records to their final destination
 */
-void flush();
+inline void flush()
+{
+    impl::flush();
+}
 
 }  // End of tmns::log namespace

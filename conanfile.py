@@ -16,6 +16,8 @@ class ConanProject(ConanFile):
     description = "Standardized, extensible, and customizable logging"
     topics = ("terminus","log")
 
+    implements = ["auto_header_only"]
+
     options = { "shared": [True, False],
                 "with_tests": [True, False],
                 "with_docs": [True, False],
@@ -39,7 +41,7 @@ class ConanProject(ConanFile):
 
     def build_requirements(self):
         self.test_requires("gtest/1.14.0")
-        self.tool_requires("terminus_cmake/1.0.1")
+        self.tool_requires("terminus_cmake/1.0.2")
 
     def requirements(self):
         if not self.options.use_external_boost:
@@ -89,9 +91,6 @@ class ConanProject(ConanFile):
          # so it's necessary to set those as empty.
          self.cpp_info.bindirs = []
          self.cpp_info.libdirs = []
-
-    def package_id(self):
-        self.info.clear()
 
     def export_sources(self):
 
