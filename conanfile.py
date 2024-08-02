@@ -8,7 +8,7 @@ from conan.tools.files import copy
 class ConanProject(ConanFile):
 
     name = "terminus_log"
-    version = "0.0.4"
+    version = "0.0.5"
 
     license = "Terminus Proprietary"
     author  = "Marvin Smith <marvin_smith1@me.com>"
@@ -41,7 +41,7 @@ class ConanProject(ConanFile):
 
     def build_requirements(self):
         self.test_requires("gtest/1.14.0")
-        self.tool_requires("terminus_cmake/1.0.2")
+        self.tool_requires("terminus_cmake/1.0.3")
 
     def requirements(self):
         if not self.options.use_external_boost:
