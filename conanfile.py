@@ -1,6 +1,7 @@
 #    File:    conanfile.py
 #    Author:  Marvin Smith
 #    Date:    7/8/2023
+
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps
 from conan.tools.files import copy
@@ -8,7 +9,7 @@ from conan.tools.files import copy
 class ConanProject(ConanFile):
 
     name = "terminus_log"
-    version = "0.0.6"
+    version = "0.0.7"
 
     license = "Terminus Proprietary"
     author  = "Marvin Smith <marvin_smith1@me.com>"
@@ -40,12 +41,12 @@ class ConanProject(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     def build_requirements(self):
-        self.test_requires("gtest/1.14.0")
-        self.tool_requires("terminus_cmake/1.0.4")
+        self.test_requires("gtest/1.15.0")
+        self.tool_requires("terminus_cmake/1.0.5")
 
     def requirements(self):
         if not self.options.use_external_boost:
-            self.requires("boost/1.85.0")
+            self.requires("boost/1.86.0")
 
     def _configure_cmake(self):
         cmake = CMake(self)
