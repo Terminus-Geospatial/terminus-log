@@ -8,24 +8,12 @@
 /*                                                                                    */
 /***************************# INTELLECTUAL PROPERTY RIGHTS ****************************/
 /**
- * @file    TEST_configure.cpp
+ * @file    log.hpp
  * @author  Marvin Smith
- * @date    7/8/2023
+ * @date    1/4/2025
 */
-#include <gtest/gtest.h>
+#pragma once
 
 // Terminus Libraries
+#include <terminus/log/Logger.hpp>
 #include <terminus/log/utility.hpp>
-
-// Project Libraries
-#include "File_Fixture.hpp"
-
-using Configure = File_Fixture;
-
-TEST_F( Configure, Log_To_File )
-{
-    tmns::log::info( "This message should be in the file!" );
-    tmns::log::flush();
-
-    expect_file_contains( "This message should be in the file!" );
-}
