@@ -1,3 +1,13 @@
+#**************************** INTELLECTUAL PROPERTY RIGHTS ****************************#
+#*                                                                                    *#
+#*                           Copyright (c) 2025 Terminus LLC                          *#
+#*                                                                                    *#
+#*                                All Rights Reserved.                                *#
+#*                                                                                    *#
+#*          Use of this source code is governed by LICENSE in the repo root.          *#
+#*                                                                                    *#
+#**************************** INTELLECTUAL PROPERTY RIGHTS ****************************#
+#
 #    File:    CMakeLists.txt
 #    Author:  Marvin Smith
 #    Date:    7/8/2023
@@ -18,7 +28,7 @@ project( ${CONAN_PKG_NAME}
         LANGUAGES CXX
 )
 
-#  Set C++ 20 Support
+#  Set C++ Info
 set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
@@ -28,13 +38,19 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Bring in CMake helpers for TERMINUS projects
 include( terminus_cmake )
 
-#  Setup Threading (pthreads for linux)
-find_package(Threads REQUIRED)
+#----------------------------------------#
+#-          Update Version File         -#
+#----------------------------------------#
+# Get the current date
+string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d %H:%M:%S" )
 
-#  Find dependencies
-#set( Boost_USE_MULTITHREADED ON )
-ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
-#ADD_DEFINITIONS(-BOOST_LOG_NO_THREADS)
+configure_file( ${CMAKE_SOURCE_DIR}/templates/Exports.hpp.in
+                ${CMAKE_BINARY_DIR}/include/terminus/log/Exports.hpp )
+
+
+#--------------------------------#
+#-      Find Dependencies       -#
+#--------------------------------#
 find_package( Boost REQUIRED )
 
 #  Setup Exports File
@@ -48,13 +64,14 @@ endif()
 
 terminus_lib_create_header_only()
 
+#------------------------------#
+#-        Build Library       -#
+#------------------------------#
 target_link_libraries( ${PROJECT_NAME} INTERFACE
-    Boost::boost
     Boost::json
     Boost::log
     Boost::log_setup
     Boost::system
-    Threads::Threads
 )
 
 #  Testing
@@ -66,11 +83,14 @@ if( TERMINUS_LOG_ENABLE_TESTS)
     add_subdirectory( test/unit )
 endif()
 
-#  Setup Coverage Reporting
-if( TERMINUS_LOG_ENABLE_COVERAGE )
-    terminus_coverage_create_target()
-endif()
 
+#  Install Headers
+install( DIRECTORY ${PROJECT_BINARY_DIR}/include/terminus DESTINATION include )
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/include/terminus DESTINATION include )
+
+#------------------------------------------------#
+#-          Setup CMake Helper Scripts          -#
+#------------------------------------------------#
 set(INSTALL_CMAKEDIR share/cmake/${PROJECT_NAME})
 
 include(CMakePackageConfigHelpers)
@@ -86,10 +106,12 @@ install(
     FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
 )
+
 install( 
     FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
 )
+
 install( 
     EXPORT ${PROJECT_NAME}_exports
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"

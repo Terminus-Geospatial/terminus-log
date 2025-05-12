@@ -1,3 +1,13 @@
+#**************************** INTELLECTUAL PROPERTY RIGHTS ****************************#
+#*                                                                                    *#
+#*                           Copyright (c) 2025 Terminus LLC                          *#
+#*                                                                                    *#
+#*                                All Rights Reserved.                                *#
+#*                                                                                    *#
+#*          Use of this source code is governed by LICENSE in the repo root.          *#
+#*                                                                                    *#
+#**************************** INTELLECTUAL PROPERTY RIGHTS ****************************#
+#
 #    File:    conanfile.py
 #    Author:  Marvin Smith
 #    Date:    7/8/2023
@@ -9,7 +19,7 @@ from conan.tools.files import copy
 class ConanProject(ConanFile):
 
     name = "terminus_log"
-    version = "0.0.7"
+    version = "0.0.8"
 
     license = "Terminus Proprietary"
     author  = "Marvin Smith <marvin_smith1@me.com>"
@@ -19,8 +29,7 @@ class ConanProject(ConanFile):
 
     implements = ["auto_header_only"]
 
-    options = { "shared": [True, False],
-                "with_tests": [True, False],
+    options = { "with_tests": [True, False],
                 "with_docs": [True, False],
                 "with_coverage": [True, False],
                 "use_source_location": [True, False],
@@ -28,25 +37,24 @@ class ConanProject(ConanFile):
                 "use_external_boost": [True,False]
     }
 
-    default_options = { "shared": True,
-                        "with_tests": True,
+    default_options = { "with_tests": True,
                         "with_docs": True,
                         "with_coverage": False,
                         "use_source_location": False,
                         "use_source_location_hack": False,
-                        "use_external_boost": False,
-                        "boost/*:shared": True
+                        "use_external_boost": False
     }
 
     settings = "os", "compiler", "build_type", "arch"
 
     def build_requirements(self):
-        self.test_requires("gtest/1.15.0")
-        self.tool_requires("terminus_cmake/1.0.5")
+        self.build_requires("cmake/4.0.1")
+        self.test_requires("gtest/1.16.0")
+        self.tool_requires("terminus_cmake/1.0.6")
 
     def requirements(self):
         if not self.options.use_external_boost:
-            self.requires("boost/1.86.0")
+            self.requires("boost/1.87.0")
 
     def _configure_cmake(self):
         cmake = CMake(self)
