@@ -78,7 +78,6 @@ target_link_libraries( ${PROJECT_NAME} INTERFACE
     Boost::json
     Boost::log
     Boost::log_setup
-    Boost::system
 )
 
 #  Testing

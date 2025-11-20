@@ -44,13 +44,14 @@ class ConanProject(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     def build_requirements(self):
-        self.build_requires("cmake/4.0.1")
-        self.test_requires("gtest/1.16.0")
+        self.build_requires("cmake/4.1.2")
+        self.test_requires("gtest/1.17.0")
+        
         self.tool_requires("terminus_cmake/1.0.7")
 
     def requirements(self):
         if not self.options.use_external_boost:
-            self.requires("boost/1.87.0")
+            self.requires("boost/1.89.0")
 
     def _configure_cmake(self):
         cmake = CMake(self)

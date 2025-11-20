@@ -24,12 +24,12 @@
 // Test Libraries
 #include "console_fixture.hpp"
 
-using LoggerTest = Console_Fixture;
+using log_Logger = Console_Fixture;
 
 /************************************/
 /*      Verify the Trace Logger     */
 /************************************/
-TEST_F( LoggerTest, Log_Trace )
+TEST_F( log_Logger, Log_Trace )
 {
     tmns::log::Logger logger{ "test" };
     logger.trace( "Hello, World! (TRACE)" );
@@ -42,7 +42,7 @@ TEST_F( LoggerTest, Log_Trace )
 /************************************/
 /*      Verify the Debug Logger     */
 /************************************/
-TEST_F( LoggerTest, Log_Debug )
+TEST_F( log_Logger, Log_Debug )
 {
     tmns::log::Logger logger{ "test" };
     logger.debug( "Hello, World! (DEBUG)" );
@@ -56,7 +56,7 @@ TEST_F( LoggerTest, Log_Debug )
 /***********************************/
 /*      Verify the Info Logger     */
 /***********************************/
-TEST_F( LoggerTest, Log_Info )
+TEST_F( log_Logger, Log_Info )
 {
     tmns::log::Logger logger{ "test" };
     logger.info( "Hello, World! (INFO)" );
@@ -70,7 +70,7 @@ TEST_F( LoggerTest, Log_Info )
 /**************************************/
 /*      Verify the Warning Logger     */
 /**************************************/
-TEST_F( LoggerTest, Log_Warning )
+TEST_F( log_Logger, Log_Warning )
 {
     tmns::log::Logger logger{ "test" };
     logger.warn( "Hello, World!" );
@@ -84,7 +84,7 @@ TEST_F( LoggerTest, Log_Warning )
 /************************************/
 /*      Verify the Error Logger     */
 /************************************/
-TEST_F( LoggerTest, Log_Error )
+TEST_F( log_Logger, Log_Error )
 {
     tmns::log::Logger logger{ "test" };
     logger.error( "Hello, World!" );
@@ -97,7 +97,7 @@ TEST_F( LoggerTest, Log_Error )
 /************************************/
 /*      Verify the Fatal Logger     */
 /************************************/
-TEST_F( LoggerTest, Log_Fatal )
+TEST_F( log_Logger, Log_Fatal )
 {
     tmns::log::Logger logger{ "test" };
     logger.fatal( "Hello, World!" );
@@ -110,7 +110,7 @@ TEST_F( LoggerTest, Log_Fatal )
 /****************************************/
 /*          Log Trace Arguments         */
 /****************************************/
-TEST_F( LoggerTest, Log_Arguments_Trace )
+TEST_F( log_Logger, Log_Arguments_Trace )
 {
     std::string name{ "Joe" };
     tmns::log::Logger logger{ "test" };
@@ -124,7 +124,7 @@ TEST_F( LoggerTest, Log_Arguments_Trace )
 /****************************************/
 /*          Log Debug Arguments         */
 /****************************************/
-TEST_F( LoggerTest, Log_Arguments_Debug )
+TEST_F( log_Logger, Log_Arguments_Debug )
 {
     std::string name{ "Bob" };
     tmns::log::Logger logger{ "test" };
@@ -138,7 +138,7 @@ TEST_F( LoggerTest, Log_Arguments_Debug )
 /***************************************/
 /*          Log Info Arguments         */
 /***************************************/
-TEST_F( LoggerTest, Log_Arguments_Info )
+TEST_F( log_Logger, Log_Arguments_Info )
 {
     std::string name{ "Mary" };
     tmns::log::Logger logger{ "test" };
@@ -152,7 +152,7 @@ TEST_F( LoggerTest, Log_Arguments_Info )
 /******************************************/
 /*          Log Warning Arguments         */
 /******************************************/
-TEST_F( LoggerTest, Log_Arguments_Warning )
+TEST_F( log_Logger, Log_Arguments_Warning )
 {
     std::string name{ "Phil" };
     tmns::log::Logger logger{ "test" };
@@ -166,7 +166,7 @@ TEST_F( LoggerTest, Log_Arguments_Warning )
 /****************************************/
 /*          Log Error Arguments         */
 /****************************************/
-TEST_F( LoggerTest, Log_Arguments_Error )
+TEST_F( log_Logger, Log_Arguments_Error )
 {
     std::string name{ "Dan" };
     tmns::log::Logger logger{ "test" };
@@ -180,7 +180,7 @@ TEST_F( LoggerTest, Log_Arguments_Error )
 /****************************************/
 /*          Log Fatal Arguments         */
 /****************************************/
-TEST_F( LoggerTest, Log_Arguments_Fatal )
+TEST_F( log_Logger, Log_Arguments_Fatal )
 {
     std::string name{ "Aaron" };
     tmns::log::Logger logger{ "test" };
@@ -194,72 +194,72 @@ TEST_F( LoggerTest, Log_Arguments_Fatal )
 /********************************************/
 /*          Log the location as Trace       */
 /********************************************/
-TEST_F( LoggerTest, Log_Location_Trace )
+TEST_F( log_Logger, Log_Location_Trace )
 {
     tmns::log::Logger logger{ "test" };
     logger.trace( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "trace" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
 /********************************************/
 /*          Log the location as Debug       */
 /********************************************/
-TEST_F( LoggerTest, Log_Location_Debug )
+TEST_F( log_Logger, Log_Location_Debug )
 {
     tmns::log::Logger logger{ "test" };
     logger.debug( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "debug" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
 /*******************************************/
 /*          Log the location as Info       */
 /*******************************************/
-TEST_F( LoggerTest, Log_Location_Info )
+TEST_F( log_Logger, Log_Location_Info )
 {
     tmns::log::Logger logger{ "test" };
     logger.info( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "info" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
 /**********************************************/
 /*          Log the location as Warning       */
 /**********************************************/
-TEST_F( LoggerTest, Log_Location_Warning )
+TEST_F( log_Logger, Log_Location_Warning )
 {
     tmns::log::Logger logger{ "test" };
     logger.warn( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "warn" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
 /********************************************/
 /*          Log the location as Error       */
 /********************************************/
-TEST_F( LoggerTest, Log_Location_Error )
+TEST_F( log_Logger, Log_Location_Error )
 {
     tmns::log::Logger logger{ "test" };
     logger.error( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "error" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
 /********************************************/
 /*          Log the location as Fatal       */
 /********************************************/
-TEST_F( LoggerTest, Log_Location_Fatal )
+TEST_F( log_Logger, Log_Location_Fatal )
 {
     tmns::log::Logger logger{ "test" };
     logger.fatal( ADD_CURRENT_LOC(), "Hello, World!" );
 
     expect_captured( "fatal" );
-    expect_captured( "TEST_Logger.cpp" );
+    expect_captured( "TEST_logger.cpp" );
 }
 
