@@ -28,6 +28,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 namespace tmns::log::impl {
 
@@ -84,7 +85,7 @@ inline bool configure( std::istream& config_stream )
  * @returns True if the file is parsed correctly and the library is configured properly.  False
  *          otherwise.
 */
-inline bool configure( std::filesystem::path& config_path )
+inline bool configure( const std::filesystem::path& config_path )
 {
     if( !std::filesystem::exists( config_path ) )
     {
@@ -98,6 +99,11 @@ inline bool configure( std::filesystem::path& config_path )
         return false;
     }
     return configure( config_stream );
+}
+
+inline bool configure( const std::string& config_path )
+{
+    return configure( std::filesystem::path{ config_path } );
 }
 
 } // end of tmns::log::impl namespace

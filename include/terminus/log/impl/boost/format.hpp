@@ -164,7 +164,7 @@ inline void json( boost::log::record_view const&  rec,
     if( const auto val = bl::extract<boost::posix_time::ptime>( "TimeStamp", rec ))
     {
         const auto& time = val.get();
-        json["RecordID"] = boost::posix_time::to_iso_extended_string( time );
+        json["TimeStamp"] = boost::posix_time::to_iso_extended_string( time );
     }
 
     // Capture Scope

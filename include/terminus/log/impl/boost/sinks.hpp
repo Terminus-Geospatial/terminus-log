@@ -227,12 +227,7 @@ class Json_File_Sink_Factory : public boost::log::sink_factory<char>
                 auto pSink = boost::make_shared<SinkType>( p_sink_backend );
                 pSink->set_filter( filt );
                 pSink->set_formatter( &format::json );
-                return pSink;
-
-                // The user doesn't have a way to preocess exceptions from threads anyhow
-                // so just suppress exceptions for now
                 pSink->set_exception_handler( boost::log::nop() );
-
                 return pSink;
             }
         }

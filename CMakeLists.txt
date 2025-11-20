@@ -44,18 +44,22 @@ include( terminus_cmake )
 # Get the current date
 string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d %H:%M:%S" )
 
-configure_file( ${CMAKE_SOURCE_DIR}/templates/Exports.hpp.in
-                ${CMAKE_BINARY_DIR}/include/terminus/log/Exports.hpp )
+# Get the current git commit hash
+execute_process(
+    COMMAND git rev-parse HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE TERMINUS_GIT_COMMIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+configure_file( ${CMAKE_SOURCE_DIR}/templates/exports.hpp.in
+                ${CMAKE_BINARY_DIR}/include/terminus/log/exports.hpp )
 
 
 #--------------------------------#
 #-      Find Dependencies       -#
 #--------------------------------#
 find_package( Boost REQUIRED )
-
-#  Setup Exports File
-configure_file( ${CMAKE_SOURCE_DIR}/templates/Exports.hpp.in
-                ${CMAKE_SOURCE_DIR}/include/terminus/log/Exports.hpp )
 
 # Setup Code Coverage
 if( TERMINUS_LOG_ENABLE_COVERAGE )
@@ -102,17 +106,17 @@ write_basic_package_version_file("${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-v
 )
 
 set( TMNS_LOG_CMAKE_INSTALL_DIR "lib/cmake/${PROJECT_NAME}")
-install( 
+install(
     FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
 )
 
-install( 
+install(
     FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
 )
 
-install( 
+install(
     EXPORT ${PROJECT_NAME}_exports
     DESTINATION "${TMNS_LOG_CMAKE_INSTALL_DIR}"
     FILE "${PROJECT_NAME}-targets.cmake"

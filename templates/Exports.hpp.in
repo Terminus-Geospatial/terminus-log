@@ -8,7 +8,7 @@
 /*                                                                                    */
 /***************************# INTELLECTUAL PROPERTY RIGHTS ****************************/
 /**
- * @file    Exports.hpp
+ * @file    exports.hpp
  * @author  Marvin Smith
  * @date    7/10/2023
 */
@@ -29,3 +29,5 @@
 #define TERMINUS_LOG_VERSION_STR   "@PROJECT_VERSION@"
 
 #define TERMINUS_LOG_BUILD_DATE    "@PROJECT_BUILD_DATE@"
+
+#define TERMINUS_GIT_COMMIT_HASH   "@TERMINUS_GIT_COMMIT_HASH@"

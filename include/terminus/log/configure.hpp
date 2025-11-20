@@ -20,6 +20,7 @@
 /// C++ Libraries
 #include <filesystem>
 #include <istream>
+#include <string>
 
 namespace tmns::log {
 
@@ -58,9 +59,14 @@ inline bool configure( std::istream& config_stream )
  * @return True if the configuration succeeds.  False if the content is not formatted correctly
  * or if the configuration fails in other ways.
 */
-inline bool configure( std::filesystem::path& config_file_path )
+inline bool configure( const std::filesystem::path& config_file_path )
 {
     return impl::configure( config_file_path );
+}
+
+inline bool configure( const std::string& config_file_path )
+{
+    return configure( std::filesystem::path{ config_file_path } );
 }
 
 } // End of tmns log namespace

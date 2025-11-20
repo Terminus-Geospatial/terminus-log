@@ -19,6 +19,7 @@
 
 // C++ Libraries
 #include <cstdint>
+#include <filesystem>
 #include <string>
 
 /**
@@ -63,7 +64,10 @@ class source_location
         {
             return m_line;
         }
-        constexpr uint_least32_t column() const noexcept;
+        inline constexpr uint_least32_t column() const noexcept
+        {
+            return 0;
+        }
         inline constexpr const char* file_name() const noexcept
         {
             return m_file.c_str();

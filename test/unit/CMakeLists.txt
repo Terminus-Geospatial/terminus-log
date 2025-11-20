@@ -15,6 +15,7 @@ add_executable( ${TEST}
     TEST_Logger.cpp
     TEST_Stream_Interceptor.cpp
     TEST_utility.cpp
+    TEST_json_formatter.cpp
 )
 
 target_link_libraries( ${TEST} PRIVATE

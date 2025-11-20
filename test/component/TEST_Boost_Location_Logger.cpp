@@ -43,7 +43,7 @@ int main()
     tmns::log::fatal( "This is a message logged at 'fatal'" );
 
     // Sinked Logger
-    tmns::log::Logger { "main" };
+    tmns::log::Logger logger{ "main" };
     logger.trace( "This is a message logged at 'trace'" );
     logger.debug( "This is a message logged at 'debug'" );
     logger.info( "This is a message logged at 'info'" );
@@ -60,7 +60,6 @@ int main()
     tmns::log::fatal( tmns::log::loc(), "This is a message logged at 'fatal'" );
 
     // Sinked Logger
-    tmns::log::Logger { "main" };
     logger.trace( tmns::log::loc(), "This is a message logged at 'trace'" );
     logger.debug( tmns::log::loc(), "This is a message logged at 'debug'" );
     logger.info( tmns::log::loc(), "This is a message logged at 'info'" );

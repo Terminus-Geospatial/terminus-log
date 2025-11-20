@@ -13,7 +13,7 @@ add_component_test( global TEST_Global_Logger.cpp )
 add_component_test( instance TEST_Instance_Logger.cpp )
 add_component_test( boost_settings TEST_Boost_Settings_File.cpp )
 add_component_test( boost_location TEST_Boost_Location_Logger.cpp )
-add_component_test( boost_json     TEST_Boost_JSON_Logger.cpp )
+add_component_test( boost_json     TEST_Boost_JSON_File_Logger.cpp )
 
 FILE( COPY logging.conf DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" )
 FILE( COPY logging-location.conf DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" )
