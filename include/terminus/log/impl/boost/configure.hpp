@@ -15,9 +15,9 @@
 #pragma once
 
 // Terminus Libraries
-#include "attributes.hpp"
-#include "format.hpp"
-#include "sinks.hpp"
+#include <terminus/log/impl/boost/attributes.hpp>
+#include <terminus/log/impl/boost/format.hpp>
+#include <terminus/log/impl/boost/sinks.hpp>
 
 // Boost Libraries
 #include <boost/log/expressions.hpp>

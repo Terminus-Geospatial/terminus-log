@@ -15,10 +15,10 @@
 #include <gtest/gtest.h>
 
 // Test Libraries
-#include "File_Fixture.hpp"
+#include "file_fixture.hpp"
 
 // Terminus Libraries
-#include <terminus/log/test/Stream_Interceptor.hpp>
+#include <terminus/log/test/stream_interceptor.hpp>
 
 // C++ Libraries
 #include <filesystem>

@@ -33,10 +33,13 @@ set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
 #  Give Vscode a fighting chance
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
 # Bring in CMake helpers for TERMINUS projects
 include( terminus_cmake )
+
+set( CMAKE_COMPILE_WARNING_AS_ERROR ON )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror" )
 
 #----------------------------------------#
 #-          Update Version File         -#

@@ -15,83 +15,9 @@
 #pragma once
 
 // Terminus Includes
-#include "../Exports.hpp"
+#include <terminus/log/exports.hpp>
 
-// C++ Libraries
-#include <cstdint>
-#include <filesystem>
-#include <string>
-
-/**
- * This flag allows clients of the library to use std::source_location if they
- * support it in the experimental version.  This is not entirely supported yet,
- * so this flag may be necessary.
-*/
-#if TERMINUS_LOG_SOURCE_LOCATION_METHOD == 0
-
-#include <experimental/source_location>
-
-namespace std
-{
-    using std::experimental::source_location;
-}
-
-#elif TERMINUS_LOG_SOURCE_LOCATION_METHOD == 1
-
-#define ADD_CURRENT_LOC() std::filesystem::path(__FILE__).filename().native(), ":", std::to_string(__LINE__), ", Func: ", std::string( __FUNCTION__), "  "
-
-namespace std
-{
-class source_location
-{
-    public:
-
-        static constexpr source_location current( const uint_least32_t line     = __LINE__,
-                                                  const std::string&   filename = __FILE__,
-                                                  const std::string&   function = "" ) noexcept
-        {
-            std::source_location result;
-            result.m_line     = line;
-            result.m_file     = filename;
-            result.m_function = function;
-            return result;
-        }
-
-        constexpr source_location() noexcept = default;
-
-        // source location field access
-        inline constexpr uint_least32_t line() const noexcept
-        {
-            return m_line;
-        }
-        inline constexpr uint_least32_t column() const noexcept
-        {
-            return 0;
-        }
-        inline constexpr const char* file_name() const noexcept
-        {
-            return m_file.c_str();
-        }
-        inline constexpr const char* function_name() const noexcept
-        {
-            return m_function.c_str();
-        }
-
-
-    private:
-
-        uint_least32_t m_line{};
-        //uint_least32_t m_column{};
-        std::string m_file { "" };
-        std::string m_function { "" };
-};
-
-}
-
-#else
-
+// C++ Standard Libraries
 #include <source_location>
 
 #define ADD_CURRENT_LOC() std::source_location::current()
-
-#endif

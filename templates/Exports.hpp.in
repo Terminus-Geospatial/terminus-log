@@ -15,12 +15,6 @@
 #pragma once
 
 /**
- * Flag to determine if we have <source_location> available or if we need
- * to hack it.
-*/
-#define TERMINUS_LOG_SOURCE_LOCATION_METHOD @TERMINUS_LOG_SOURCE_LOCATION_METHOD@
-
-/**
  * Build Information
  */
 #define TERMINUS_LOG_VERSION_MAJOR @PROJECT_VERSION_MAJOR@

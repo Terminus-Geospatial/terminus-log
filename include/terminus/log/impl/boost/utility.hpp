@@ -15,7 +15,7 @@
 #pragma once
 
 // Project Libraries
-#include "../location.hpp"
+#include <terminus/log/impl/location.hpp>
 
 // Boost Libraries
 #include <boost/log/attributes/scoped_attribute.hpp>

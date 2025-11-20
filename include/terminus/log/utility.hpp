@@ -15,8 +15,8 @@
 #pragma once
 
 // Terminus Libraries
-#include "impl/boost/utility.hpp"
-#include "impl/location.hpp"
+#include <terminus/log/impl/boost/utility.hpp>
+#include <terminus/log/impl/location.hpp>
 
 namespace tmns::log {
 

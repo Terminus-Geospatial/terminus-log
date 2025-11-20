@@ -18,7 +18,7 @@
 #include <terminus/log/utility.hpp>
 
 // Project Libraries
-#include "File_Fixture.hpp"
+#include "file_fixture.hpp"
 
 using Configure = File_Fixture;
 

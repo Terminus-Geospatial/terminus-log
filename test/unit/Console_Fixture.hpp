@@ -17,7 +17,7 @@
 // Terminus Libraries
 #include <terminus/log/configure.hpp>
 #include <terminus/log/utility.hpp>
-#include <terminus/log/test/Stream_Interceptor.hpp>
+#include <terminus/log/test/stream_interceptor.hpp>
 
 // GoogleTest Libraries
 #include <gmock/gmock.h>

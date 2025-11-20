@@ -12,7 +12,7 @@
  * @author  Marvin Smith
  * @date    7/8/2023
 */
-#include "Console_Fixture.hpp"
+#include "console_fixture.hpp"
 
 // Terminus Libraries
 #include <terminus/log/utility.hpp>

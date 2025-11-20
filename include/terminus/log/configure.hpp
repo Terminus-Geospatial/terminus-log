@@ -15,7 +15,7 @@
 #pragma once
 
 /// Terminus Libraries
-#include "impl/boost/configure.hpp"
+#include <terminus/log/impl/boost/configure.hpp>
 
 /// C++ Libraries
 #include <filesystem>

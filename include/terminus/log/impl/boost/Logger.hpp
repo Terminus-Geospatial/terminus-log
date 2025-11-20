@@ -15,8 +15,8 @@
 #pragma once
 
 // Terminus Libraries
-#include "../location.hpp"
-#include "utility.hpp"
+#include <terminus/log/impl/location.hpp>
+#include <terminus/log/impl/boost/utility.hpp>
 
 // Boost Libraries
 #include <boost/log/attributes/constant.hpp>

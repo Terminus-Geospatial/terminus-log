@@ -15,7 +15,7 @@
 #pragma once
 
 // Project Libraries
-#include "format.hpp"
+#include <terminus/log/impl/boost/format.hpp>
 
 // Boost Libraries
 #include <boost/algorithm/string/case_conv.hpp>

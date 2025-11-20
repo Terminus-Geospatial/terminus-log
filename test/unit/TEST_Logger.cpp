@@ -17,12 +17,12 @@
 
 // Terminus Libraries
 #include <terminus/log/configure.hpp>
-#include <terminus/log/Logger.hpp>
+#include <terminus/log/logger.hpp>
 #include <terminus/log/utility.hpp>
-#include <terminus/log/test/Stream_Interceptor.hpp>
+#include <terminus/log/test/stream_interceptor.hpp>
 
 // Test Libraries
-#include "Console_Fixture.hpp"
+#include "console_fixture.hpp"
 
 using LoggerTest = Console_Fixture;
 

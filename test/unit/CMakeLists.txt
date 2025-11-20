@@ -8,12 +8,18 @@ message( STATUS "CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}" )
 find_package( GTest REQUIRED )
 include( GoogleTest )
 
+#------------------------------------#
+#-      Include Directories         -#
+#------------------------------------#
+include_directories( ${CMAKE_SOURCE_DIR}/include )
+include_directories( ${CMAKE_BINARY_DIR}/include )
+
 set(TEST ${PROJECT_NAME}_test)
 
 add_executable( ${TEST}
     TEST_configure.cpp
-    TEST_Logger.cpp
-    TEST_Stream_Interceptor.cpp
+    TEST_logger.cpp
+    TEST_stream_interceptor.cpp
     TEST_utility.cpp
     TEST_json_formatter.cpp
 )

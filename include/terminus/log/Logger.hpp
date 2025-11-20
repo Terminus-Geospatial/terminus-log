@@ -8,15 +8,15 @@
 /*                                                                                    */
 /***************************# INTELLECTUAL PROPERTY RIGHTS ****************************/
 /**
- * @file    Logger.hpp
+ * @file    logger.hpp
  * @author  Marvin Smith
  * @date    7/8/2023
 */
 #pragma once
 
 // Terminus Libraries
-#include "impl/boost/Logger.hpp"
-#include "impl/location.hpp"
+#include <terminus/log/impl/boost/logger.hpp>
+#include <terminus/log/impl/location.hpp>
 
 // C++ Libraries
 #include <memory>

@@ -19,7 +19,7 @@ from conan.tools.files import copy
 class ConanProject(ConanFile):
 
     name = "terminus_log"
-    version = "0.0.9"
+    version = "0.0.10"
 
     license = "Terminus Proprietary"
     author  = "Marvin Smith <marvin_smith1@me.com>"
@@ -32,16 +32,12 @@ class ConanProject(ConanFile):
     options = { "with_tests": [True, False],
                 "with_docs": [True, False],
                 "with_coverage": [True, False],
-                "use_source_location": [True, False],
-                "use_source_location_hack": [True, False],
                 "use_external_boost": [True,False]
     }
 
     default_options = { "with_tests": True,
                         "with_docs": True,
                         "with_coverage": False,
-                        "use_source_location": False,
-                        "use_source_location_hack": False,
                         "use_external_boost": False
     }
 
@@ -50,7 +46,7 @@ class ConanProject(ConanFile):
     def build_requirements(self):
         self.build_requires("cmake/4.0.1")
         self.test_requires("gtest/1.16.0")
-        self.tool_requires("terminus_cmake/1.0.6")
+        self.tool_requires("terminus_cmake/1.0.7")
 
     def requirements(self):
         if not self.options.use_external_boost:
@@ -72,15 +68,7 @@ class ConanProject(ConanFile):
         tc.variables["TERMINUS_LOG_ENABLE_DOCS"]     = self.options.with_docs
         tc.variables["TERMINUS_LOG_ENABLE_COVERAGE"] = self.options.with_coverage
 
-        if self.options.use_source_location:
-            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "0"
-        elif not self.options.use_source_location and not self.options.use_source_location_hack:
-            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "2"
-        elif not self.options.use_source_location and self.options.use_source_location_hack:
-            tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "1"
-        else:
-            raise Exception("Unknown state")
-        print("TERMINUS_LOG_SOURCE_LOCATION_METHOD: ", tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"])
+        tc.variables["TERMINUS_LOG_SOURCE_LOCATION_METHOD"] = "2"
 
         tc.generate()
 
