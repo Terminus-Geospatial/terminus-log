@@ -15,5 +15,6 @@
 #pragma once
 
 // Terminus Libraries
-#include <terminus/log/Logger.hpp>
+#include <terminus/log/exports.hpp>
+#include <terminus/log/logger.hpp>
 #include <terminus/log/utility.hpp>

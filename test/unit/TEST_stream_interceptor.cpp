@@ -8,7 +8,7 @@
 /*                                                                                    */
 /***************************# INTELLECTUAL PROPERTY RIGHTS ****************************/
 /**
- * @file    TEST_Stream_Interceptor.cpp
+ * @file    TEST_stream_interceptor.cpp
  * @author  Marvin Smith
  * @date    7/8/2023
 */

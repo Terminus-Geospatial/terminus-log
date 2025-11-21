@@ -11,8 +11,8 @@ include( GoogleTest )
 #------------------------------------#
 #-      Include Directories         -#
 #------------------------------------#
-include_directories( ${CMAKE_SOURCE_DIR}/include )
-include_directories( ${CMAKE_BINARY_DIR}/include )
+include_directories( ${CMAKE_SOURCE_DIR}/library/include )
+include_directories( ${CMAKE_BINARY_DIR}/library/include )
 
 set(TEST ${PROJECT_NAME}_test)
 

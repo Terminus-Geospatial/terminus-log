@@ -20,6 +20,7 @@
 
 // C++ Libraries
 #include <memory>
+#include <string>
 
 namespace tmns::log {
 
@@ -40,7 +41,14 @@ class Logger
 
         /**
          * Constructs a new instances and assigns it to the provided scope.
-        */
+         */
+        Logger() : Logger( "global" )
+        {
+        }
+
+        /**
+         * Constructs a new instances and assigns it to the provided scope.
+         */
         Logger( std::string scope ) : m_logger { std::move( scope ) }
         {
         }

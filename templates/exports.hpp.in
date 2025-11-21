@@ -25,3 +25,26 @@
 #define TERMINUS_LOG_BUILD_DATE    "@PROJECT_BUILD_DATE@"
 
 #define TERMINUS_LOG_GIT_COMMIT_HASH   "@TERMINUS_GIT_COMMIT_HASH@"
+
+// C++ Standard Libraries
+#include <map>
+#include <string>
+
+namespace tmns::log {
+
+/**
+ * @brief Get the build info this library was compiled with
+ */
+inline std::map<std::string,std::string> get_build_info()
+{
+    return {
+        { "TERMINUS_LOG_VERSION_MAJOR",   std::to_string( TERMINUS_LOG_VERSION_MAJOR ) },
+        { "TERMINUS_LOG_VERSION_MINOR",   std::to_string( TERMINUS_LOG_VERSION_MINOR ) },
+        { "TERMINUS_LOG_VERSION_PATCH",   std::to_string( TERMINUS_LOG_VERSION_PATCH ) },
+        { "TERMINUS_LOG_VERSION_STR",     std::string{ TERMINUS_LOG_VERSION_STR } },
+        { "TERMINUS_LOG_BUILD_DATE",      std::string{ TERMINUS_LOG_BUILD_DATE } },
+        { "TERMINUS_LOG_GIT_COMMIT_HASH", std::string{ TERMINUS_LOG_GIT_COMMIT_HASH } }
+    };
+}
+
+} // End of tmns::log namespace

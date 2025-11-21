@@ -8,7 +8,7 @@
 /*                                                                                    */
 /***************************# INTELLECTUAL PROPERTY RIGHTS ****************************/
 /**
- * @file    Logger.hpp
+ * @file    logger.hpp
  * @author  Marvin Smith
  * @date    7/9/2023
 */

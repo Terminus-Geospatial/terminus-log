@@ -38,8 +38,34 @@ set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 # Bring in CMake helpers for TERMINUS projects
 include( terminus_cmake )
 
+# Force the high warning preset published by terminus_cmake across this project
+set( TERMINUS_CXX_FLAGS ${TERMINUS_CXX_FLAGS_HIGH} CACHE STRING "Terminus warning preset" FORCE )
+
+set( TERMINUS_LOG_PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/library/include" )
+set( TERMINUS_LOG_PUBLIC_HEADERS
+    terminus/log/impl/boost/logger.hpp
+    terminus/log/impl/boost/utility.hpp
+    terminus/log/impl/boost/attributes.hpp
+    terminus/log/impl/boost/sinks.hpp
+    terminus/log/impl/boost/configure.hpp
+    terminus/log/impl/boost/format.hpp
+    terminus/log/impl/location.hpp
+    terminus/log/logger.hpp
+    terminus/log/utility.hpp
+    terminus/log/test/Stream_Interceptor.hpp
+    terminus/log/configure.hpp
+    terminus/log.hpp
+)
+
+set( TERMINUS_LOG_INTERFACE_SOURCES )
+foreach(_hdr IN LISTS TERMINUS_LOG_PUBLIC_HEADERS)
+    list(APPEND TERMINUS_LOG_INTERFACE_SOURCES
+        "$<BUILD_INTERFACE:${TERMINUS_LOG_PUBLIC_INCLUDE_DIR}/${_hdr}>"
+        "$<INSTALL_INTERFACE:include/${_hdr}>"
+    )
+endforeach()
+
 set( CMAKE_COMPILE_WARNING_AS_ERROR ON )
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror" )
 
 #----------------------------------------#
 #-          Update Version File         -#
@@ -56,7 +82,7 @@ execute_process(
 )
 
 configure_file( ${CMAKE_SOURCE_DIR}/templates/exports.hpp.in
-                ${CMAKE_BINARY_DIR}/include/terminus/log/exports.hpp )
+                ${CMAKE_BINARY_DIR}/library/include/terminus/log/exports.hpp )
 
 
 #--------------------------------#
@@ -80,6 +106,11 @@ target_link_libraries( ${PROJECT_NAME} INTERFACE
     Boost::log_setup
 )
 
+target_sources( ${PROJECT_NAME}
+    INTERFACE
+        ${TERMINUS_LOG_INTERFACE_SOURCES}
+)
+
 #  Testing
 if( TERMINUS_LOG_ENABLE_TESTS)
     enable_testing()
@@ -91,8 +122,8 @@ endif()
 
 
 #  Install Headers
-install( DIRECTORY ${PROJECT_BINARY_DIR}/include/terminus DESTINATION include )
-install( DIRECTORY ${PROJECT_SOURCE_DIR}/include/terminus DESTINATION include )
+install( DIRECTORY ${PROJECT_BINARY_DIR}/library/include/terminus DESTINATION include )
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/library/include/terminus DESTINATION include )
 
 #------------------------------------------------#
 #-          Setup CMake Helper Scripts          -#

@@ -86,3 +86,25 @@ ctest -V
 ```
 
 The component tests are normal executables and can be run directly from `build/test/component`.
+
+### Package Tests
+
+```bash
+cd build/test/package
+cmake --build .
+./example
+```
+
+Expected output:
+
+```bash
+>$ ./example
+[2025-11-20 19:36:22.503730] [0x00000002017360c0] [info]    Hello World!
+[2025-11-20 19:36:22.504118] [0x00000002017360c0] [info]    Terminus Log Build Information:
+TERMINUS_LOG_BUILD_DATE: 2025-11-20 19:34:58
+TERMINUS_LOG_GIT_COMMIT_HASH:
+TERMINUS_LOG_VERSION_MAJOR: 0
+TERMINUS_LOG_VERSION_MINOR: 0
+TERMINUS_LOG_VERSION_PATCH: 12
+TERMINUS_LOG_VERSION_STR: 0.0.12
+```
